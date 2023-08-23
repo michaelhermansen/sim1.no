@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "turbogoblin – dagen er din",
+    "description": "recording · mix · master",
+    "imageSrc": "/assets/dagen-er-din.png",
+    "audioSrc": "/assets/dagen-er-din.mp3"
+  },
+  {
+    "id": 2,
+    "title": "sim1 – questionmarks ft. nati",
+    "description": "production · mix · master",
+    "imageSrc": "/assets/questionmarks.png",
+    "audioSrc": "/assets/questionmarks.mp3"
+  },
+  {
+    "id": 3,
+    "title": "sim1 – miljølyd",
+    "description": "sound design · mix – resampled sounds from urban oslo",
+    "imageSrc": "/assets/miljolyd.png",
+    "audioSrc": "/assets/miljolyd.mp3"
+  }
+]

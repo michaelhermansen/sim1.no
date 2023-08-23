@@ -2,26 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@layer utilities {
+  .shine {
+    @apply drop-shadow-[0_0_0.5px_rgba(255,255,255,1)];
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  .dark-stroke {
+    @apply [text-shadow:0_0_2px_black,0_0_2px_black,0_0_2px_black,0_0_2px_black,0_0_2px_black,0_0_2px_black,0_0_2px_black,0_0_2px_black,0_0_2px_black,0_0_2px_black,0_0_2px_black];
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  min-height: 100svh;
+  position: relative;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 15rem;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  @apply bg-white/20 h-6;
+}
+
+input[type="range"]::-moz-range-track {
+  @apply bg-white/20 h-6;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  @apply bg-white h-6 w-6;
+}
+
+input[type="range"]::-moz-range-thumb {
+  border: none;
+  border-radius: 0;
+  @apply bg-white h-6 w-6;
 }

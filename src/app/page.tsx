@@ -25,7 +25,16 @@ export default function Home() {
         </Container>
       </div>
 
-      <div className="h-24"></div>
+      <footer className="py-16">
+        <Container>
+          <h2 className="font-wide pb-2 text-lg">Contact</h2>
+          <div className="font-condensed">
+            <a href="tel:+4798171267">+47 981 71 267</a>
+            <br />
+            <a href="mailto:simenstenrod@gmail.com">simenstenrod@gmail.com</a>
+          </div>
+        </Container>
+      </footer>
     </div>
   );
 }

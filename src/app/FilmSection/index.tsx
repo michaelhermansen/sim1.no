@@ -9,8 +9,8 @@ export default function FilmSection() {
         embedUrl="https://www.youtube.com/embed/XDQ-S0J4I6c?si=9QEtIh94aXUv2s8B"
       />
       <FilmCard
-        title="kun for inviterte"
-        description="composition · mix · master · foley"
+        title="ashen kingdom intro"
+        description="composition · mix · master · foley · voice"
         embedUrl="https://www.youtube.com/embed/ridlNGea62I?si=b_8tKwy-MXqMyiJp"
       />
     </div>

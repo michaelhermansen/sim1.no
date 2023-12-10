@@ -2,7 +2,6 @@ import clsx from "clsx";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Roboto_Flex } from "next/font/google";
-import Header from "./Header";
 import Head from "next/head";
 
 const robotoFlex = Roboto_Flex({
@@ -48,8 +47,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
 
       <html lang="en">
         <body className={clsx(robotoFlex.className, "bg-black text-white")}>
-          <Header />
-          <main>{props.children}</main>
+          {props.children}
         </body>
       </html>
     </>

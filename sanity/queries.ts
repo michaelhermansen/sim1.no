@@ -63,8 +63,6 @@ export type Settings = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  seoTitle: string;
-  seoDescription: string;
   emailAddress: string;
   phoneNumber: string;
 };

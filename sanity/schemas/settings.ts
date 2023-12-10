@@ -6,18 +6,6 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
-      name: "seoTitle",
-      title: "SEO title",
-      type: "string",
-      validation: (Rule) => Rule.required().min(1).max(30),
-    }),
-    defineField({
-      name: "seoDescription",
-      title: "SEO description",
-      type: "string",
-      validation: (Rule) => Rule.required().min(10).max(60),
-    }),
-    defineField({
       name: "phoneNumber",
       title: "Phone number",
       type: "string",

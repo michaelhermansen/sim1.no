@@ -20,6 +20,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <>
       <Head>
+        <meta name="robots" content="noindex" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"

@@ -32,6 +32,7 @@ export default defineType({
       type: "url",
       name: "youtubeUrl",
       title: "YouTube URL",
+      validation: (Rule) => Rule.required(),
     }),
   ],
 

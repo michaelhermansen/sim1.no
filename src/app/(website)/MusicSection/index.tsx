@@ -5,13 +5,13 @@ import MusicCard from "./MusicCard";
 import clsx from "clsx";
 import { MdClose } from "react-icons/md";
 import { IconContext } from "react-icons";
-import musicEntries from "./entries.json";
 import Container from "@/components/Container";
+import { Music } from "../../../../sanity/queries";
 
-let prevAudioId: number | undefined;
+let prevAudioId: string | undefined;
 
-export default function MusicSection() {
-  const [currentAudioId, setCurrentAudioId] = useState<number | null>(null);
+export default function MusicSection(props: { entries: Music[] }) {
+  const [currentAudioId, setCurrentAudioId] = useState<string | null>(null);
   const animationRef = useRef<number | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const audioTimelineRef = useRef<HTMLInputElement>(null);
@@ -58,7 +58,7 @@ export default function MusicSection() {
     };
   }, []);
 
-  function handlePlayPause(audioSrc: string, id: number) {
+  function handlePlayPause(audioSrc: string, id: string) {
     const audio = audioRef.current;
     if (!audio) return;
 
@@ -86,14 +86,14 @@ export default function MusicSection() {
   return (
     <IconContext.Provider value={{ size: "2.5rem", className: "fill-white" }}>
       <div className="grid gap-4">
-        {musicEntries.map((entry) => (
+        {props.entries.map((entry) => (
           <MusicCard
-            key={entry.id}
+            key={entry._id}
             title={entry.title}
             description={entry.description}
-            imageSrc={entry.imageSrc}
-            isPlaying={currentAudioId === entry.id}
-            onPlay={() => handlePlayPause(entry.audioSrc, entry.id)}
+            imageSrc={entry.albumArt.asset.url}
+            isPlaying={currentAudioId === entry._id}
+            onPlay={() => handlePlayPause(entry.audioFile.asset.url, entry._id)}
           />
         ))}
       </div>

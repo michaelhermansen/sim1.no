@@ -42,6 +42,7 @@ export default defineType({
           title: "Alternative text",
         },
       ],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       type: "file",
@@ -50,6 +51,7 @@ export default defineType({
       options: {
         accept: "audio/*",
       },
+      validation: (Rule) => Rule.required(),
     }),
   ],
 

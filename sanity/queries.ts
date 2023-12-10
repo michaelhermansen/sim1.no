@@ -5,7 +5,7 @@ export const musicQuery = groq`
     ...,
     audioFile{ asset-> {url} },
     albumArt{ asset-> {url} },
-  } | order(_createdAt asc)
+  } | order(_updatedAt desc)
 `;
 
 export type Music = {
@@ -37,7 +37,7 @@ export const filmQuery = groq`
     ...,
     audioFile{ asset-> {url} },
     albumArt{ asset-> {url} },
-  } | order(_createdAt asc)
+  } | order(_updatedAt desc)
 `;
 
 export type Film = {

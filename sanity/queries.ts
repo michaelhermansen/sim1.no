@@ -1,14 +1,14 @@
 import { groq } from "next-sanity";
 
-export const musicQuery = groq`
-  *[_type == "music"] {
+export const audioQuery = groq`
+  *[_type == "audio"] {
     ...,
     audioFile{ asset-> {url} },
     albumArt{ asset-> {url} },
   } | order(_updatedAt desc)
 `;
 
-export type Music = {
+export type Audio = {
   _type: string;
   _id: string;
   _createdAt: string;
@@ -18,7 +18,7 @@ export type Music = {
     _type: string;
     current: string;
   };
-  description: string;
+  subtitle: string;
   audioFile: {
     asset: {
       url: string;
@@ -30,17 +30,21 @@ export type Music = {
     };
   };
   title: string;
+  category: {
+    _ref: string;
+    _type: "reference";
+  };
 };
 
-export const filmQuery = groq`
-  *[_type == "film"] {
+export const videoQuery = groq`
+  *[_type == "video"] {
     ...,
     audioFile{ asset-> {url} },
     albumArt{ asset-> {url} },
   } | order(_updatedAt desc)
 `;
 
-export type Film = {
+export type Video = {
   _type: string;
   _id: string;
   _createdAt: string;
@@ -50,9 +54,13 @@ export type Film = {
     _type: string;
     current: string;
   };
-  description: string;
+  subtitle: string;
   title: string;
   youtubeUrl: string;
+  category: {
+    _ref: string;
+    _type: "reference";
+  };
 };
 
 export const settingsQuery = groq`*[_type == "settings" && _id == "settings"][0]`;

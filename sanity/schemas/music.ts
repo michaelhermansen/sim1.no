@@ -2,6 +2,7 @@ import { defineField, defineType } from "sanity";
 import { FiMusic } from "react-icons/fi";
 
 export default defineType({
+  // @ts-expect-error
   icon: FiMusic,
   name: "music",
   title: "Music",
@@ -11,7 +12,11 @@ export default defineType({
       name: "title",
       title: "Title",
       type: "string",
-      validation: (Rule) => Rule.required().min(1).max(30),
+    }),
+    defineField({
+      name: "description",
+      title: "Description",
+      type: "text",
     }),
     defineField({
       name: "slug",
@@ -23,45 +28,14 @@ export default defineType({
       },
     }),
     defineField({
-      name: "description",
-      title: "Description",
-      type: "string",
-      validation: (Rule) => Rule.required().min(10).max(60),
+      name: "audioFile",
+      title: "Audio File",
+      type: "file",
     }),
     defineField({
       name: "albumArt",
-      title: "Album art",
+      title: "Album Art",
       type: "image",
-      options: {
-        hotspot: false,
-      },
-      fields: [
-        {
-          name: "alt",
-          type: "string",
-          title: "Alternative text",
-        },
-      ],
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      type: "file",
-      name: "audioFile",
-      title: "Audio file",
-      options: {
-        accept: "audio/*",
-      },
-      validation: (Rule) => Rule.required(),
     }),
   ],
-
-  preview: {
-    select: {
-      title: "title",
-      media: "albumArt",
-    },
-    prepare(selection) {
-      return { ...selection };
-    },
-  },
 });

@@ -33,8 +33,12 @@ export default defineConfig({
                 S.document().schemaType("settings").documentId("settings")
               ),
             // Rest
-            S.documentTypeListItem("music").title("Music"),
-            S.documentTypeListItem("film").title("Film"),
+            S.documentTypeListItem("category").title("Categories"),
+            S.documentTypeListItem("audio").title("Audio"),
+            S.documentTypeListItem("video").title("Video"),
+            // S.divider(),
+            // S.documentTypeListItem("music").title("Music (old)"),
+            // S.documentTypeListItem("film").title("Film (old)"),
           ]),
     }),
     // Vision is a tool that lets you query your content with GROQ in the studio

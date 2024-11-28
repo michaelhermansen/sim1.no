@@ -1,27 +1,29 @@
-import Container from "@/components/Container";
-import FilmSection from "./FilmSection";
-import MusicSection from "./MusicSection";
-import Image from "next/image";
 import { client } from "../../../sanity/lib/client";
+import VideoSection from "./VideoSection";
+import AudioSection from "./AudioSection";
+import Container from "@/components/Container";
 import {
-  Film,
-  Music,
   Settings,
-  filmQuery,
-  musicQuery,
+  Video,
+  Audio,
   settingsQuery,
+  videoQuery,
+  audioQuery,
 } from "../../../sanity/queries";
+import Image from "next/image";
 
 export default async function Home() {
-  const musicEntries = await client.fetch<Music[]>(musicQuery);
-  const filmEntries = await client.fetch<Film[]>(filmQuery);
+  const audioEntries = await client.fetch<Audio[]>(audioQuery);
+  const videoEntries = await client.fetch<Video[]>(videoQuery);
   const settings = await client.fetch<Settings>(settingsQuery);
+
+  console.log({ audioEntries, videoEntries });
 
   return (
     <div className="grid gap-8 pt-8">
       <Container>
-        <h2 className="text-xl font-wide pb-4">Music</h2>
-        <MusicSection entries={musicEntries} />
+        <h2 className="text-xl font-wide pb-4">Audio</h2>
+        <AudioSection entries={audioEntries} />
       </Container>
 
       <div className="relative pt-14">
@@ -33,8 +35,8 @@ export default async function Home() {
           className="absolute top-0 left-1/2 -translate-x-1/2 -z-10"
         />
         <Container>
-          <h2 className="text-xl font-wide pb-4 dark-stroke">Film</h2>
-          <FilmSection entries={filmEntries} />
+          <h2 className="text-xl font-wide pb-4 dark-stroke">Video</h2>
+          <VideoSection entries={videoEntries} />
         </Container>
       </div>
 

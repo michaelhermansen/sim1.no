@@ -2,6 +2,7 @@ import { defineField, defineType } from "sanity";
 import { FiFilm } from "react-icons/fi";
 
 export default defineType({
+  // @ts-expect-error
   icon: FiFilm,
   name: "film",
   title: "Film",
@@ -11,7 +12,11 @@ export default defineType({
       name: "title",
       title: "Title",
       type: "string",
-      validation: (Rule) => Rule.required().min(1).max(30),
+    }),
+    defineField({
+      name: "description",
+      title: "Description",
+      type: "text",
     }),
     defineField({
       name: "slug",
@@ -23,25 +28,9 @@ export default defineType({
       },
     }),
     defineField({
-      name: "description",
-      title: "Description",
-      type: "string",
-      validation: (Rule) => Rule.required().min(10).max(60),
-    }),
-    defineField({
-      type: "url",
       name: "youtubeUrl",
       title: "YouTube URL",
-      validation: (Rule) => Rule.required(),
+      type: "url",
     }),
   ],
-
-  preview: {
-    select: {
-      title: "title",
-    },
-    prepare(selection) {
-      return { ...selection };
-    },
-  },
 });

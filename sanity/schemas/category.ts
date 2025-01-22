@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 import { FiTag } from "react-icons/fi";
 
 export default defineType({
-  // @ts-expect-error
+  // @ts-ignore
   icon: FiTag,
   name: "category",
   title: "Category",

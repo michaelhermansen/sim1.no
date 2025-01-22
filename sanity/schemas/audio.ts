@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 import { FiMusic } from "react-icons/fi";
 
 export default defineType({
-  // @ts-expect-error
+  // @ts-ignore
   icon: FiMusic,
   name: "audio",
   title: "Audio",
@@ -30,20 +30,7 @@ export default defineType({
     defineField({
       name: "content",
       title: "Content",
-      type: "array",
-      of: [
-        {
-          type: "block",
-          styles: [{ title: "Normal", value: "normal" }],
-          lists: [],
-          marks: {
-            decorators: [
-              { title: "Strong", value: "strong" },
-              { title: "Emphasis", value: "em" },
-            ],
-          },
-        },
-      ],
+      type: "content",
     }),
     defineField({
       name: "category",
@@ -63,7 +50,6 @@ export default defineType({
       type: "image",
     }),
   ],
-
   preview: {
     select: {
       title: "title",

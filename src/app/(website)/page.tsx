@@ -9,14 +9,8 @@ import {
   videoQuery,
 } from "../../../sanity/queries";
 import Entries from "./Entries";
-
-export const sections = [
-  { title: "All", slug: "" },
-  { title: "Music production", slug: "music-production" },
-  { title: "Recording & mixing", slug: "recording-and-mixing" },
-  { title: "Game audio", slug: "game-audio" },
-  { title: "Film", slug: "film" },
-];
+import { sections } from "@/lib/sections";
+import { Suspense } from "react";
 
 export default async function Home() {
   const audioEntries = await client.fetch<Audio[]>(audioQuery);

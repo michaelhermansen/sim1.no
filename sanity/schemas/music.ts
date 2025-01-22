@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 import { FiMusic } from "react-icons/fi";
 
 export default defineType({
-  // @ts-expect-error
+  // @ts-ignore
   icon: FiMusic,
   name: "music",
   title: "Music",

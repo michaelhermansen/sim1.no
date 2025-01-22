@@ -2,10 +2,10 @@
 
 import Container from "@/components/Container";
 import Image from "next/image";
-import { sections } from "./page";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import clsx from "clsx";
+import { sections } from "@/lib/sections";
 
 export default function Header() {
   const searchParams = useSearchParams();
@@ -35,7 +35,7 @@ export default function Header() {
             {sections.map((section) => (
               <div className="flex items-center gap-2" key={section.slug}>
                 {section.slug === (filter || "") && (
-                  <div className="h-6 w-6 grid place-items-center animate-spin">
+                  <div className="h-6 w-6 grid place-items-center animate-spin mb-0.5">
                     <Image
                       alt=""
                       src="/assets/star.png"

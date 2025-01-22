@@ -39,7 +39,7 @@ export default function Entries({ groupedEntries }: Props) {
 
   useEffect(() => {
     handleStop();
-  }, [filter]); // 🤫
+  }, [handleStop, filter]); // 🤫
 
   return (
     <AnimatePresence mode="wait">

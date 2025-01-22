@@ -6,7 +6,8 @@ import video from "./schemas/video";
 import music from "./schemas/music";
 import film from "./schemas/film";
 import category from "./schemas/category";
+import content from "./schemas/content";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [settings, audio, video, music, film, category],
+  types: [settings, audio, video, music, film, category, content],
 };

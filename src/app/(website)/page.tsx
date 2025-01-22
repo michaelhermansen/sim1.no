@@ -1,44 +1,39 @@
-import { client } from "../../../sanity/lib/client";
-import VideoSection from "./VideoSection";
-import AudioSection from "./AudioSection";
 import Container from "@/components/Container";
+import { client } from "../../../sanity/lib/client";
 import {
-  Settings,
-  Video,
   Audio,
-  settingsQuery,
-  videoQuery,
   audioQuery,
+  Settings,
+  settingsQuery,
+  Video,
+  videoQuery,
 } from "../../../sanity/queries";
-import Image from "next/image";
+import Entries from "./Entries";
+
+export const sections = [
+  { title: "All", slug: "" },
+  { title: "Music production", slug: "music-production" },
+  { title: "Recording & mixing", slug: "recording-and-mixing" },
+  { title: "Game audio", slug: "game-audio" },
+  { title: "Film", slug: "film" },
+];
 
 export default async function Home() {
   const audioEntries = await client.fetch<Audio[]>(audioQuery);
   const videoEntries = await client.fetch<Video[]>(videoQuery);
   const settings = await client.fetch<Settings>(settingsQuery);
+  const allEntries = [...audioEntries, ...videoEntries];
 
-  console.log({ audioEntries, videoEntries });
+  const groupedEntries = sections.map((section) => ({
+    category: { title: section.title, slug: section.slug },
+    entries: categoryGroup(section.slug, allEntries),
+  }));
 
   return (
     <div className="grid gap-8 pt-8">
       <Container>
-        <h2 className="text-xl font-wide pb-4">Audio</h2>
-        <AudioSection entries={audioEntries} />
+        <Entries groupedEntries={groupedEntries} />
       </Container>
-
-      <div className="relative pt-14">
-        <Image
-          src="/assets/film.png"
-          alt=""
-          height={140}
-          width={390}
-          className="absolute top-0 left-1/2 -translate-x-1/2 -z-10"
-        />
-        <Container>
-          <h2 className="text-xl font-wide pb-4 dark-stroke">Video</h2>
-          <VideoSection entries={videoEntries} />
-        </Container>
-      </div>
 
       <footer className="py-16">
         <Container>
@@ -56,4 +51,13 @@ export default async function Home() {
       </footer>
     </div>
   );
+}
+
+function categoryGroup(categorySlug: string, entries: (Audio | Video)[]) {
+  return entries
+    .filter((entry) => entry.category.slug.current === categorySlug)
+    .toSorted(
+      (a, b) =>
+        new Date(b._updatedAt).getTime() - new Date(a._updatedAt).getTime()
+    );
 }

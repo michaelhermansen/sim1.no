@@ -1,7 +1,16 @@
+"use client";
+
 import Container from "@/components/Container";
 import Image from "next/image";
+import { sections } from "./page";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import clsx from "clsx";
 
 export default function Header() {
+  const searchParams = useSearchParams();
+  const filter = searchParams.get("filter");
+
   return (
     <header>
       <Container className="relative">
@@ -13,7 +22,7 @@ export default function Header() {
           className="absolute inset-0 -z-10 object-cover"
         />
 
-        <div className="pt-10 pb-14">
+        <div className="pt-10 pb-10">
           <div className="w-5/6 mx-auto relative dark-stroke">
             <div className="absolute inset-0 blur-[1px] opacity-90">
               <Logo />
@@ -23,9 +32,30 @@ export default function Header() {
             </div>
           </div>
           <div className="w-5/6 pl-5 pt-2 mx-auto text-lg font-wide dark-stroke">
-            <div>Sound design</div>
-            <div>Mixing</div>
-            <div>Production</div>
+            {sections.map((section) => (
+              <div className="flex items-center gap-2" key={section.slug}>
+                {section.slug === (filter || "") && (
+                  <div className="h-6 w-6 grid place-items-center animate-spin">
+                    <Image
+                      alt=""
+                      src="/assets/star.png"
+                      width={26}
+                      height={26}
+                      className="object-contain h-5 w-5"
+                    />
+                  </div>
+                )}
+                <Link
+                  href={section.slug ? `?filter=${section.slug}` : "/"}
+                  className={clsx("block w-full hover:underline pl-4 -ml-4", {
+                    "hover:translate-x-3 transition-transform":
+                      filter !== (section.slug || null),
+                  })}
+                >
+                  {section.title}
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </Container>

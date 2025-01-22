@@ -28,6 +28,24 @@ export default defineType({
       type: "string",
     }),
     defineField({
+      name: "content",
+      title: "Content",
+      type: "array",
+      of: [
+        {
+          type: "block",
+          styles: [{ title: "Normal", value: "normal" }],
+          lists: [],
+          marks: {
+            decorators: [
+              { title: "Strong", value: "strong" },
+              { title: "Emphasis", value: "em" },
+            ],
+          },
+        },
+      ],
+    }),
+    defineField({
       name: "category",
       title: "Category",
       type: "reference",

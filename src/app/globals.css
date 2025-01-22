@@ -15,6 +15,7 @@
 body {
   min-height: 100svh;
   position: relative;
+  -webkit-tap-highlight-color: transparent; /* for removing the highlight */
 }
 
 input[type="range"] {

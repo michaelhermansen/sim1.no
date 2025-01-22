@@ -1,6 +1,10 @@
+import { PortableText } from "@portabletext/react";
+import { MdInfoOutline } from "react-icons/md";
+
 interface Props {
   title: string;
   subtitle: string;
+  content: any;
   embedUrl: string;
 }
 
@@ -19,6 +23,14 @@ export default function VideoCard(props: Props) {
       <div>
         <h3 className="font-wide text-lg leading-tight pb-1">{props.title}</h3>
         <p className="font-condensed">{props.subtitle}</p>
+        {props.content && props.content.length !== 0 && (
+          <div className="flex gap-1.5 pt-1">
+            <MdInfoOutline size={"1.3em"} className="shrink-0" />
+            <div className="prose prose-invert prose-p:mb-0.5 prose-p:first-of-type:mt-0 font-condensed leading-snug">
+              <PortableText value={props.content} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

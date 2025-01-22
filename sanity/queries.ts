@@ -5,11 +5,12 @@ export const audioQuery = groq`
     ...,
     audioFile{ asset-> {url} },
     albumArt{ asset-> {url} },
+    category->{title, slug},
   } | order(_updatedAt desc)
 `;
 
 export type Audio = {
-  _type: string;
+  _type: "audio";
   _id: string;
   _createdAt: string;
   _updatedAt: string;
@@ -31,9 +32,10 @@ export type Audio = {
   };
   title: string;
   category: {
-    _ref: string;
-    _type: "reference";
+    title: string;
+    slug: { current: string };
   };
+  content: any;
 };
 
 export const videoQuery = groq`
@@ -41,11 +43,13 @@ export const videoQuery = groq`
     ...,
     audioFile{ asset-> {url} },
     albumArt{ asset-> {url} },
+    category->{title, slug},
+    content,
   } | order(_updatedAt desc)
 `;
 
 export type Video = {
-  _type: string;
+  _type: "video";
   _id: string;
   _createdAt: string;
   _updatedAt: string;
@@ -58,9 +62,10 @@ export type Video = {
   title: string;
   youtubeUrl: string;
   category: {
-    _ref: string;
-    _type: "reference";
+    title: string;
+    slug: { current: string };
   };
+  content: any;
 };
 
 export const settingsQuery = groq`*[_type == "settings" && _id == "settings"][0]`;

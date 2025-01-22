@@ -1,20 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import AudioCard from "./AudioCard";
-import clsx from "clsx";
-import { MdClose } from "react-icons/md";
-import { IconContext } from "react-icons";
-import Container from "@/components/Container";
-import { Audio } from "../../../../sanity/queries";
 
 let prevAudioId: string | undefined;
 
-type Props = {
-  entries: Audio[];
-};
-
-export default function AudioSection(props: Props) {
+export function useAudioPlayer() {
   const [currentAudioId, setCurrentAudioId] = useState<string | null>(null);
   const animationRef = useRef<number | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -87,51 +77,22 @@ export default function AudioSection(props: Props) {
     prevAudioId = id;
   }
 
-  return (
-    <IconContext.Provider value={{ size: "2.5rem", className: "fill-white" }}>
-      <div className="grid gap-4">
-        {props.entries.map((entry) => (
-          <AudioCard
-            key={entry._id}
-            title={entry.title}
-            subtitle={entry.subtitle}
-            imageSrc={entry.albumArt.asset.url}
-            isPlaying={currentAudioId === entry._id}
-            onPlay={() => handlePlayPause(entry.audioFile.asset.url, entry._id)}
-          />
-        ))}
-      </div>
+  function handleStop() {
+    const audio = audioRef.current;
+    if (!audio) return;
 
-      <audio className="hidden" ref={audioRef} />
+    audio.pause();
+    audio.currentTime = 0;
+    setCurrentAudioId(null);
+    prevAudioId = undefined;
+  }
 
-      <div
-        className={clsx("fixed z-50 bottom-0 left-0 right-0 transition-all", {
-          "translate-y-full opacity-0": !currentAudioId,
-        })}
-      >
-        <Container className="bg-black py-4 border-t border-white/10">
-          <div className="flex gap-2">
-            <input
-              ref={audioTimelineRef}
-              type="range"
-              max="100"
-              className="flex-1 bg-white"
-              onChange={(e) => {
-                if (!audioRef.current) return;
-                audioRef.current.currentTime = Number(e.target.value);
-              }}
-            />
-            <button
-              onClick={() => {
-                audioRef.current?.pause();
-                setCurrentAudioId(null);
-              }}
-            >
-              <MdClose />
-            </button>
-          </div>
-        </Container>
-      </div>
-    </IconContext.Provider>
-  );
+  return {
+    handlePlayPause,
+    handleStop,
+    currentAudioId,
+    audioRef,
+    audioTimelineRef,
+    setCurrentAudioId,
+  };
 }

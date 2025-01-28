@@ -26,6 +26,7 @@ export default function Entries({ groupedEntries }: Props) {
     audioTimelineRef,
     setCurrentAudioId,
     handleStop,
+    checkIsPlaying,
   } = useAudioPlayer();
 
   const searchParams = useSearchParams();
@@ -38,8 +39,8 @@ export default function Entries({ groupedEntries }: Props) {
   if (!filter) filtered = groupedEntries;
 
   useEffect(() => {
-    handleStop();
-  }, [handleStop, filter]); // 🤫
+    if (checkIsPlaying()) handleStop();
+  }, [handleStop, checkIsPlaying, filter]);
 
   return (
     <AnimatePresence mode="wait">

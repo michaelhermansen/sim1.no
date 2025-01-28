@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 let prevAudioId: string | undefined;
 
@@ -77,7 +77,7 @@ export function useAudioPlayer() {
     prevAudioId = id;
   }
 
-  function handleStop() {
+  const handleStop = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
@@ -85,11 +85,16 @@ export function useAudioPlayer() {
     audio.currentTime = 0;
     setCurrentAudioId(null);
     prevAudioId = undefined;
-  }
+  }, []);
+
+  const checkIsPlaying = useCallback(() => {
+    return !audioRef.current?.paused;
+  }, []);
 
   return {
     handlePlayPause,
     handleStop,
+    checkIsPlaying,
     currentAudioId,
     audioRef,
     audioTimelineRef,
